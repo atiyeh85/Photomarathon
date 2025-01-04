@@ -101,7 +101,7 @@ namespace PhotogeraphyGrant.Controllers
                         SmtpClient smtp = new SmtpClient();
                         smtp.Host = "smtp.gmail.com";
                         smtp.EnableSsl = true;
-                        NetworkCredential networkCredential = new NetworkCredential("darolsaltaneh.festival@gmail.com", "nosazi@97");
+                        NetworkCredential networkCredential = new NetworkCredential("darolsaltaneh.festival@gmail.com", "");
                         smtp.UseDefaultCredentials = true;
                         smtp.Credentials = networkCredential;
                         smtp.Port = 587;
@@ -278,7 +278,7 @@ namespace PhotogeraphyGrant.Controllers
                         SmtpClient smtp = new SmtpClient();
                         smtp.Host = "smtp.gmail.com";
                         smtp.EnableSsl = true;
-                        NetworkCredential networkCredential = new NetworkCredential("darolsaltaneh.festival@gmail.com", "nosazi@97");
+                        NetworkCredential networkCredential = new NetworkCredential("darolsaltaneh.festival@gmail.com", "");
                         smtp.UseDefaultCredentials = true;
                         smtp.Credentials = networkCredential;
                         smtp.Port = 587;
