@@ -1,0 +1,46 @@
+﻿@{
+    Layout = null;
+}
+<link href="~/Content/Css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/Css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/Css/stylesheet.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+
+
+<div class="login-container">
+    <div class="login-header">
+        <h4>احراز هویت</h4>
+    </div>
+    <form>
+        <div class="login-field">
+            <label for="username">نام کاربری</label>
+            <input type="text" name="username" id="username" placeholder="نام کاربری">
+            <i class="fa fa-user"></i>
+        </div>
+        <div class="login-field">
+            <label for="password">کلمه عبور</label>
+            <input type="password" name="password" id="password" placeholder="کلمه عبور">
+            <i class="fa fa-key"></i>
+        </div>
+        <div class="login-button">
+            <button type="submit" class="btn btn-large btn-block blue">ورود  <i class=" fa fa-arrow-left"></i></button>
+        </div>
+        <div class="forgot-password">
+            <a href="#">Forgot password?</a>
+        </div>
+    </form>
+</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.backstretch.js"></script>
+
+<script>
+        $.backstretch([
+          "Content/1.jpg",
+          "Content/2.jpg"
+        ], {
+            fade: 750,
+            duration: 4000
+        });
+</script>
+

@@ -1,0 +1,133 @@
+﻿@model PhotogeraphyGrant.Models.Search
+
+@{
+    Layout = null;
+}
+<link href="~/Content/Css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/Css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/Css/stylesheet.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.backstretch.js"></script>
+
+<style>
+    body{
+        font-family:Tahoma;
+        font-size:larger
+    }
+    span{
+        color:red;
+        font-size:small
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="login-container">
+        <div class="login-header">
+            <h4>ورود به سامانه </h4>
+            <p class="alert alert-danger">
+                لطفا در صورت بروز هر گونه خطا در هنگام ثبت نام با شماره پشتیبانی 09360752346 تماس بگیرید
+            </p>
+        </div>
+        @if (ViewBag.Error != null)
+
+        {
+            <div class="alert alert-danger">
+                <h5>
+                    @ViewBag.Error
+                </h5>
+            </div>
+        }
+
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-danger">
+                <h5>
+                    @TempData["Message"]
+                </h5>
+            </div>
+        }
+        <div class="login-field">
+            <label for="NationalCode">کد ملی </label>
+            @Html.TextBoxFor(model => model.NationalCode, new { @class = "form-control input-lg", placeholder = " کد ملی   " })
+            <i class="fa fa-User"></i>
+            <span>
+                @Html.ValidationMessageFor(model => model.NationalCode, "", new { @class = "text-danger" })
+            </span>
+        </div>
+        <div class="login-field">
+            <label for="Mobile">شماره همراه </label>
+            @Html.TextBoxFor(model => model.Mobile, new { @class = "form-control input-lg", placeholder = " شماره همراه    " })
+            <i class="fa fa-mobile"></i>
+            <span>
+                @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+            </span>
+        </div>
+        <div class="login-field">
+            <label for="Securitycode">کد امنیتی </label>
+            @Html.PasswordFor(model => model.Securitycode, new { @class = "form-control input-lg", placeholder = " کد امنیتی   " })
+            <i class="fa fa-key"></i>
+            <span>
+                @Html.ValidationMessageFor(model => model.Securitycode, "", new { @class = "text-danger" })
+            </span>
+        </div>
+        <div class="login-button">
+            <button type="submit" class="btn btn-large btn-block blue">ورود  <i class=" fa fa-arrow-left"></i></button>
+        </div>
+        <div class="login-button" style="text-align:center">
+            <a href="@Url.Action("ResendCode", "PersonProfiles",new { @class ="btn btn-larg" }) " class="elements">
+                <span class="fas fa-envelope  animated fa-2x" style="color:#106641"> </span>
+                &nbsp;&nbsp;برای ارسال کدامنتی  به آدرس پست  الکترونیک  خود کلیک کنید <b>
+                </b>
+            </a>
+
+
+        </div>
+        <div class="login-button" style="text-align:center">
+            <a href="@Url.Action("Create", "PersonProfiles",new { @class ="btn btn-larg" }) " class="elements">
+                <span class="fas fa-user-plus faa-horizontal  animated fa-2x" style="color:#ad2e1d"> </span>  &nbsp;&nbsp;برای ثبت نام لطفا کلیک کنید<b>
+                </b>
+            </a>
+
+
+        </div>
+    </div>
+}
+
+
+<script>
+    $.backstretch([
+      "Content/1.jpg",
+      "Content/2.jpg"
+    ], {
+        fade: 750,
+        duration: 4000
+    });
+    document.getElementById('NationalCode').addEventListener('keypress', function (e) {
+        if (isEnglish(e.charCode)) {
+            alert("English");
+            console.log('English');
+        }
+
+      
+        else if (isPersian(e.key))
+        {
+            alert("لطفا صفحه کلید خود را به انگلیسی تغییر دهید");
+        }
+    });
+    function isEnglish(charCode) {
+        return (charCode >= 97 && charCode <= 122)
+               || (charCode >= 65 && charCode <= 90);
+    }
+
+    function isPersian(key) {
+        var p = /^[\u0600-\u06FF\s]+$/;
+        return p.test(key) && key != ' ';
+    }
+</script>
+
+

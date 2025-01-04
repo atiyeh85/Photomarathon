@@ -1,0 +1,72 @@
+﻿@model PhotogeraphyGrant.Models.Resend
+@{
+    ViewBag.Title = "..::..";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="col-md-6 col-lg-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <p>
+                        <i class="fas fa-check"></i>
+                        <b>
+                            برای ارسال مجدد شناسه امنیتی لطفا شماره همراه و کد ملی را وارد نمائید
+                        </b>
+                    </p>
+                </div>
+                <div class="panel-body">
+                    @if (TempData["Error"] != null)
+                    {
+                    <div class="col-lg-12">
+                        <div class="alert alert-danger">
+                            @TempData["Error"]
+                        </div>
+                    </div>
+                    }
+                    <div class="col-md-12">
+                        <span style="color:#a70808" class="icon-star-empty "> </span>
+                        کد ملی
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="fas fa-address-book fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextBoxFor(model => model.NationalCode, new { @class = "form-control input-lg", placeholder = "  کد ملی   " })
+                        </div>
+                        <b>
+                            @Html.ValidationMessageFor(model => model.NationalCode, "", new { @class = "text-danger" })
+                        </b>
+                    </div>
+
+                    <div class="col-md-12">
+                        <span style="color:#a70808" class="icon-star-empty "> </span>
+
+                        شماره تلفن همراه
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="fas fa-mobile-alt faa-ring  animated fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextBoxFor(model => model.Mobile, new { @class = "form-control input-lg", placeholder = "  شماره تلفن همراه   " })
+                        </div>
+                        <b>
+                            @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                        </b>
+                    </div>
+                    <div class="col-md-12">
+                        <input type="submit" value="ارسال  کد امنیتی  به آدرس پست الکترونیک " class="btn btn-success " />|
+                        <a class="btn btn-danger" onclick="location.href = 'http://78.38.56.77:6064/'; return false;">بازگشت به صفحه قبل<i class="fas fa-backward"></i></a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

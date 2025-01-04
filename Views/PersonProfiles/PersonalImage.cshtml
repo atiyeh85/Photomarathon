@@ -1,0 +1,125 @@
+﻿@model PhotogeraphyGrant.Models.PersonProfile
+@using MvcFileUploader.HtmlHelper
+@using MvcFileUploader.Models
+@{
+    ViewBag.Title = "..::..";
+}
+<br />
+<br />
+<br />
+@Html.HiddenFor(model => model.PersonProfileid)
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div style="text-align:center">
+
+            <span class="fa-stack fa-2x" style="color:#9b9999">
+                <i class="fa fa-circle  fa-stack-2x"></i>
+                <strong class="fa-stack-1x   " style="color:white"> 1</strong>
+            </span>
+            <span class="fa-stack fa-3x" style="color:rgba(255,0,0,.85)">
+                <i class="fa fa-circle faa-pulse  animated fa-stack-2x"></i>
+                <strong class="fa-stack-1x " style="color:white">2 </strong>
+            </span>
+            <span class="fa-stack fa-2x" style="color:#9b9999">
+                <i class="fa fa-circle  fa-stack-2x"></i>
+                <strong class="fa-stack-1x   " style="color:white"> 3</strong>
+            </span>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="alert alert-danger">
+                <p>
+                    <i class="fas fa-check"></i>
+                     تصویر پرسنلی با فرمت jpg باشد.
+
+                </p>
+                <p>
+                    <i class="fas fa-check"></i>
+                    فایل رزومه با فرمت pdf بارگذاری شود.
+                </p>
+                <p>
+                    <i class="fas fa-check"></i>
+                    حجم فایل ارسالی بیشتراز 2 مگابایت نباشد.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="well">
+                <legend>
+                        بارگذاری تصویر پرسنلی
+                </legend>
+                @(
+        Html.MvcFileUpload()
+         .UploadAt(Url.Action("PersonalImagee", "PersonProfiles"))
+         .WithFileTypes(@"/(\.|\/)(jpe?g|png)$/i")
+        
+        .WithMaxFileSize(2000000)
+         .AddFormField("PersonProfileid", Convert.ToString(Model.PersonProfileid))
+         .AddFormField("ImageUrl", "ImageUrl")
+         .AddFormField("Image", "Image")
+        .AddFormField("NationalCode", Convert.ToString(Model.NationalCode))
+        .RenderInline("_MvcFileupload")
+                )
+                @if (Model.ImageUrl != null)
+                {
+                <a style="color:#ca0808" href="#" data-url="/PersonProfiles/DeleteImgurl/@Model.PersonProfileid" class="fas fa-trash-alt fa-2x Delete"> </a>
+
+                @Html.ActionLink("Image===>>>" + "تصویر پرسنلی", "DownloadImgUrl", new { id = Model.PersonProfileid })
+                <br />
+                }
+                <div class="alert alert-warning">
+
+                </div>
+            </div>
+
+            <div class="well">
+                <legend>بارگذاری رزومه </legend>
+                @(
+        Html.MvcFileUpload()
+        .UploadAt(Url.Action("PersonalImagee", "PersonProfiles"))
+        .WithFileTypes(@"/(\.|\/)(pdf)$/i")
+        .WithMaxFileSize(2000000)
+        .MaxNumberOfFiles(1)
+        .AddFormField("PersonProfileid", Convert.ToString(Model.PersonProfileid))
+        .AddFormField("NationalCode", Convert.ToString(Model.NationalCode))
+         .AddFormField("ResomehUrl", "ResomehUrl")
+        .DisableImagePreview()
+        .ExcludeSharedScript()  //this should be called as this page contains another inline widget which loaded shared scripts
+        .RenderInline("_MvcFileupload")
+                )
+                @if (Model.ResomehUrl != null)
+                {
+                    <a style="color:#ca0808" href="#" data-url="/PersonProfiles/DeleteResomehurl/@Model.PersonProfileid" class="fas fa-trash-alt fa-2x Delete"> </a>
+
+                    @Html.ActionLink("Cv===>>>" + " رزومه", "DownloadResomehUrl", new { id = Model.PersonProfileid })
+                    <br />
+                }
+            </div>
+        </div>
+        <div class="row col-md-offset-5 ">
+            <a href='@Url.Action("Details", "PersonProfiles", new { id=Model.PersonProfileid})' class="btn btn-primary "><i class="fa fa-user fa-2x"></i>تایید اطلاعات و ادامه ثبت نام</a>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+ var deleted=false;
+
+        $(document).delegate('.Delete', 'click', function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: $(this).attr('data-url'),
+                method: 'post',
+                data: null,
+                success: function (data) {
+                    if (data == 'true') {
+                        $("#div-listindex").load(location.href + " #div-listindex");
+                        deleted=true;
+                    }
+                }
+            })
+        });
+    </script>
+}

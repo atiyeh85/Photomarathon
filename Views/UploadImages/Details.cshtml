@@ -1,0 +1,98 @@
+﻿@model PhotogeraphyGrant.Models.UploadImage
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UploadImage</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.CatTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.CatTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImgAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImgAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserUpload)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserUpload)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateUpload)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateUpload)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeUpload)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeUpload)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastDateEdit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastDateEdit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastTimeEdit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastTimeEdit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PersonProfileid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PersonProfileid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageLenght)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageLenght)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Uploadid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

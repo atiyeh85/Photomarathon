@@ -1,0 +1,104 @@
+﻿@model PhotogeraphyGrant.Models.UploadImage
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>UploadImage</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.CatTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.CatTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImgAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImgAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserUpload)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserUpload)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateUpload)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateUpload)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeUpload)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeUpload)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastDateEdit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastDateEdit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastTimeEdit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastTimeEdit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PersonProfileid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PersonProfileid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageLenght)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageLenght)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

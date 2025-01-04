@@ -1,0 +1,137 @@
+﻿@model PhotogeraphyGrant.Models.Search
+
+@{
+   
+}
+
+<style>
+    body{
+        font-family:Tahoma;
+        font-size:larger
+    }
+    span{
+        color:red;
+        font-size:small
+    }
+</style>
+<br />
+<br />
+<br />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-6 col-lg-offset-3">
+            <p class="alert alert-danger">
+                لطفا در صورت بروز هر گونه خطا در هنگام ثبت نام با شماره پشتیبانی 09360752346 تماس بگیرید
+            </p>
+        </div>
+    </div>
+   <div class="row col-md-6 col-lg-offset-3">
+       <div class="panel panel-default">
+           <div class="panel-heading">
+               <h4 style="color:#106641">
+                   لطفا برای بارگذاری تصاویر خود شماره موبایل ،کد ملی و کد امنیتی را وارد نمائید
+               </h4>
+           </div>
+           <div class="panel-body">
+               @if (ViewBag.Error != null)
+
+               {
+                   <div class="alert alert-danger">
+                       <h5>
+                           @ViewBag.Error
+                       </h5>
+                   </div>
+               }
+
+               @if (TempData["Message"] != null)
+               {
+                   <div class="alert alert-danger">
+                       <h5>
+                           @TempData["Message"]
+                       </h5>
+                   </div>
+               }    
+               <div class="col-md-12">
+                   <div class="login-button" style="text-align:center">
+                       <a href="@Url.Action("Create", "PersonProfiles",new { @class ="btn btn-larg" }) " class="elements">
+                           <span class="fas fa-user-plus faa-horizontal  animated fa-2x" style="color:#ad2e1d"> </span>  &nbsp;&nbsp;برای ثبت نام لطفا کلیک کنید<b>
+                           </b>
+                       </a>
+                   </div>
+               </div>
+                   <div class="col-md-12">
+                       <span style="color:#a70808" class="icon-star-empty "> </span>
+
+                       شماره تلفن همراه
+                       <div class="input-group" style="margin-bottom: 10px">
+                           <span class="input-group-addon">
+                               <i class="icon-user icon-2x">
+                               </i>
+                           </span>
+                           @Html.TextBoxFor(model => model.Mobile, new { @class = "form-control input-lg", placeholder = "شماره تلفن همراه    " })
+                       </div>
+                       <b>
+                           @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                       </b>
+                   </div>
+                   <div class="col-md-12">
+                       <span style="color:#a70808" class="icon-star-empty "> </span>
+                       کد ملی
+                       <div class="input-group" style="margin-bottom: 10px">
+                           <span class="input-group-addon">
+                               <i class="icon-user icon-2x">
+                               </i>
+                           </span>
+                           @Html.TextBoxFor(model => model.NationalCode, new { @class = "form-control input-lg", placeholder = "  کد ملی    " })
+                       </div>
+                       <b>
+                           @Html.ValidationMessageFor(model => model.NationalCode, "", new { @class = "text-danger" })
+                       </b>
+                   </div>
+                   <div class="col-md-12">
+                       <span style="color:#a70808" class="icon-star-empty "> </span>
+                       @Html.LabelFor(m => Model.Securitycode, new { @class = "control-label  validator" })
+                       <div class="input-group" style="margin-bottom: 10px">
+                           <span class="input-group-addon">
+                               <i class="icon-user icon-2x">
+                               </i>
+                           </span>
+                           @Html.PasswordFor(model => model.Securitycode, new { @class = "form-control input-lg required", placeholder = " کد امنیتی   " })
+                       </div>
+                       <b>
+                           @Html.ValidationMessageFor(model => model.Securitycode, "", new { @class = "text-danger" })
+                       </b>
+                   </div>
+                   <div class="col-md-12">
+                       <button type="submit" class="btn btn-large btn-block blue">بازآوری اطلاعات  <i class=" fa fa-arrow-left"></i></button>
+                   </div>
+                   <div class="col-md-12">
+                       @*<div class="login-button" style="text-align:center">
+                           <a href="@Url.Action("Create", "PersonProfiles",new { @class ="btn btn-larg" }) " class="elements">
+                               <span class="fas fa-user-plus faa-horizontal  animated fa-2x" style="color:#ad2e1d"> </span>  &nbsp;&nbsp;برای ثبت نام لطفا کلیک کنید<b>
+                               </b>
+                           </a>
+
+
+                       </div>*@
+                       <div class="login-button" style="text-align:center">
+                           <a href="@Url.Action("ResendCode", "PersonProfiles",new { @class ="btn btn-larg" }) " class="elements">
+                               <span class="fas fa-envelope  animated fa-2x" style="color:#106641"> </span>
+                               &nbsp;&nbsp;برای ارسال کدامنتی  به آدرس پست  الکترونیک  خود کلیک کنید <b>
+                               </b>
+                           </a>
+
+
+                       </div>
+                   </div>
+               </div>
+       </div>
+
+   </div>
+}
+
+
+
+

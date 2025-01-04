@@ -1,0 +1,121 @@
+﻿@model PhotogeraphyGrant.ViewModels.Refereevm
+@{
+    ViewBag.Title = "..::..";
+
+}
+
+<div class="modal-header ">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+   
+ @if (Model != null)
+ {
+    <p class="modal-title Mheader" id="myModalLabelEP">@Model.Fname  @Model.Lname</p>
+
+ }
+ else
+ {
+    <p class="modal-title Mheader" id="myModalLabelEP">  </p>
+
+ }
+</div>
+<style>
+    .Mheader {
+        color: white;
+        text-align: center;
+        font-family: Tahoma;
+        font-size: large;
+    }
+    .ch {
+        color: darkred;
+    }
+    span{
+        color:red
+    }
+</style>
+@using (Html.BeginForm())
+{
+    <div class="modal-body">
+
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.PersonProfileid)
+
+        @Html.ValidationSummary(true)
+        <div class="form-horizontal">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="box box-warning">
+                                <div class="box-body no-padding">
+                                    <div class="panel panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div style="">
+                                                    <div class="input-group" style="margin-bottom: 10px">
+                                                        <span class="input-group-addon">
+                                                            <i class="icon-user">
+                                                            </i>
+                                                            امتیازباید بین بازه 0-100 باشد
+                                                        </span>
+                                                        @Html.EditorFor(model => model.Point, new { @class = "form-control ", placeholder = " امتیاز بین 0-100 ", autocomplete = "off" })
+                                                    </div>
+                                                    <b>
+                                                        @Html.ValidationMessageFor(model => model.Point, "", new { @class = "text-danger" })
+                                                    </b>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                 ملاحضات
+                                                <div style="">
+                                                    <div class="input-group" style="margin-bottom: 10px">
+                                                        <span class="input-group-addon">
+                                                            <i class="icon-user">
+                                                            </i>
+                                                        </span>
+                                                        @Html.TextAreaFor(model => model.RefereeNote, new { @class = "form-control ", placeholder = " ملاحضات ", autocomplete = "off" })
+                                                    </div>
+                                                    <b>
+                                                        @Html.ValidationMessageFor(model => model.RefereeNote, "", new { @class = "text-danger" })
+                                                    </b>
+                                                </div>
+                                            </div>
+                                        </div>
+                                     
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <span id="progress" class="text-center" style="display: none;">
+            <img src="~/Content/Images/Wait.gif" alt="wiat" />
+            Wait..
+        </span>
+
+        <button class="btn" type="button" data-dismiss="modal">Cancel</button>
+        <input class="btn btn-danger waves-effect waves-light" type="submit" value="ثبت" />
+    </div>
+
+}
+
+
+<script>
+    $(function () {
+        $.ajax({
+            dataType: "json",
+            type: "GET",
+            url: "/Create/RefereePoints",
+            success: function (data) {
+                alert("True");
+            }
+        });
+    });
+   
+</script>

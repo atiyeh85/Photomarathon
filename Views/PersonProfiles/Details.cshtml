@@ -1,0 +1,283 @@
+﻿
+@model PhotogeraphyGrant.Models.PersonProfile
+@using MvcFileUploader.HtmlHelper
+@using MvcFileUploader.Models
+@{
+    ViewBag.Title = "..::..";
+
+    var showingInline = true;
+}
+<br />
+<br />
+<br />
+<style>
+    .color {
+        color: #ad2e1d;
+    }
+    .div {
+        color: #0252ac;
+        padding: 10px;
+        margin: 25px;
+    }
+
+    .span {
+        color: #ad2e1d;
+    }
+
+
+    #Color {
+        color: #014E77;
+    }
+
+    td {
+        color: #198145;
+    }
+
+    a.my-class {
+        color: #0b6c13;
+        font-family: Tahoma;
+    }
+
+    a.my-class2 {
+        color: #e26d19;
+        font-family: Tahoma;
+        font-size: large;
+    }
+
+    .menuItem {
+        font-family: Tahoma;
+        font-size: 11pt;
+        font-weight: 300;
+    }
+
+        .menuItem .menuItemContainer {
+            background-color: rgba(214, 213, 213, 0.58);
+            border-radius: 10px;
+        }
+
+        .menuItem span.fa {
+            padding: 5px;
+            color: #B3200D;
+        }
+</style>
+<div class="panel panel-default">
+    <div class="row">
+        <div style="text-align:center">
+
+            <span class="fa-stack fa-2x" style="color:#9b9999">
+                <i class="fa fa-circle  fa-stack-2x"></i>
+                <strong class="fa-stack-1x   " style="color:white"> 1</strong>
+            </span>
+
+            <span class="fa-stack fa-2x" style="color:#9b9999">
+                <i class="fa fa-circle  fa-stack-2x"></i>
+                <strong class="fa-stack-1x   " style="color:white"> 2</strong>
+            </span>
+            <span class="fa-stack fa-3x" style="color:rgba(255,0,0,.85)">
+                <i class="fa fa-circle faa-pulse  animated fa-stack-2x"></i>
+                <strong class="fa-stack-1x " style="color:white">3 </strong>
+            </span>
+        </div>
+
+    </div>
+    <div class="row">
+        <div  class="col-md-3 col-lg-offset-9">
+            <a class="btn btn-success" onclick="location.href='@Url.Action("PersonalImage", "PersonProfiles",new { id=Model.PersonProfileid})';return false;">بازگشت به صفحه قبل<i class="fas fa-backward"></i></a>
+            |
+            <button class="btn btn-danger" onclick="location.href='@Url.Action("Search", "PersonProfiles")';return false;">خروج<i class="fas fa-sign-out-alt fa-2x"></i></button>
+        </div>
+        <div  class="col-md-3 col-lg-offset-11">
+        </div>
+       
+    </div>
+        <div class="panel-heading">
+            <h3 style="text-align:center">
+                 ویرایش اطلاعات فردی 
+            </h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-12 ">
+                    <div>
+                        @if (@Model.Image != null)
+                        {
+                            <img class="img-rounded img-responsive" style="position:absolute;left:20px;top:10px;height:120px;width:120px;" src="@Url.Content(@Model.Image)" />
+                        }
+                        else
+                        {
+                            <img class="img-thumbnail img-responsive" id="image_preview" style="position:absolute;left:10px;" alt="" src="" />
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+
+                <div class="col-md-4 ">نام ونام خانوادگی :&nbsp;<span class="span">@Html.DisplayFor(model => model.FullName)
+                    &nbsp;&nbsp;  </span>با کد ملی : &nbsp;&nbsp;@Html.DisplayFor(model => model.NationalCode)</div>
+                <div class="col-md-2 ">جنسیت:&nbsp;<span class="span">@Html.DisplayFor(model => model.Gender.GenderTitle) </span></div>
+                <div class="col-md-3 ">مدرک تحصیلی:&nbsp;<span class="span">@Html.DisplayFor(model => model.Degree.DegreeTitle) </span></div>
+                <div class="col-md-3 ">رشته  تحصیلی:&nbsp;<span class="span">@Html.DisplayFor(model => model.Reshteh) </span></div>
+                <div class="col-md-3 "> آدرس الکترونیک:&nbsp;<span class="span">@Html.DisplayFor(model => model.Mail) </span></div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-4 ">نام  پدر :&nbsp;<span class="span">@Html.DisplayFor(model => model.FatherName)</span></div>
+                <div class="col-md-2">کد پستی:&nbsp;<span class="span">@Html.DisplayFor(model => model.PostalCode)</span></div>
+                <div class="col-md-3 ">شماره تلفن ثابت :&nbsp;<span class="span">@Html.DisplayFor(model => model.Telephone)</span></div>
+                <div class="col-md-3 ">موبایل :&nbsp;<span class="span">@Html.DisplayFor(model => model.Mobile)</span></div>
+                <div class="col-md-3 "> استان  :&nbsp;<span class="span">@Html.DisplayFor(model => model.City.Ostan.OstanName)  </span></div>
+
+                <div class="col-md-3 ">شهر  :&nbsp;<span class="span">@Html.DisplayFor(model => model.City.CityName)  </span></div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12 " style="text-align:center;font-size:x-large">
+                    &nbsp;&nbsp;برای ویرایش اطلاعات شخصی  
+                    <a href="@Url.Action("Edit", "PersonProfiles",
+                            new { id = Model.PersonProfileid }) "
+                        class="elements"><span class="fas fa-user-edit faa-horizontal  animated fa-3x" style="color:#ad2e1d"> </span></a>&nbsp;&nbsp;کلیک کنید!
+                </div>
+            </div>
+            <div class="row">
+                <div class="alert alert-danger">
+                    <p><i class="fas fa-check"></i>
+                    تصاویر ارسالی با فرمت jpg باشد.
+                    </p>
+                    <p>
+                        <i class="fas fa-check"></i>
+                      حجم هر عکس  بیشتراز 2 مگابایت نباشد.
+                    </p>
+                    <p>
+                        <i class="fas fa-check"></i>
+                       تعداد عکس های ارسالی برای هر بخش حداکثر 10 تا باشد.
+                    </p>
+                </div>
+            </div>
+           @if (Model.UploadImages.Count >0)
+           {
+            <div class="box-body no-padding">
+                <div class="" id="div-listindex">
+                    @Html.Action("index", "UploadImages", new { id = Model.PersonProfileid })
+                </div>
+            </div>
+           }
+            <div class="row">
+                <br />
+                <br />
+               
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="panel panel-warning">
+                        <div class="panel-heading">
+                           بارگذاری تصاویر بخش جنبی (معماری)
+                        </div>
+                        <div class="panel-body">
+                            <div class="well">
+                                @(
+        Html.MvcFileUpload()
+        .UploadAt(Url.Action("UploadFile", "MvcUploaderTest"))
+        .WithFileTypes(@"/(\.|\/)(jpe?g|png)$/i")
+        .WithMaxFileSize(2000000)
+        .MaxNumberOfFiles(10)
+        .AddFormField("CatImageid", "3")
+        .AddFormField("PersonProfileid", Convert.ToString(Model.PersonProfileid))
+        .AddFormField("NationalCode", Model.NationalCode)
+        .AddFormField("Mobile", Model.Mobile)
+        .AddFormField("Category", "Architecture")
+        .DisableImagePreview()
+          //this should be called as this page contains another inline widget which loaded shared scripts
+        .RenderInline("_MvcFileupload")
+                                )
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                           بارگذاری تصاویر بخش تلفن همراه 
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="well">
+                                @(
+        Html.MvcFileUpload()
+        .UploadAt(Url.Action("UploadFile", "MvcUploaderTest"))
+        .WithFileTypes(@"/(\.|\/)(jpe?g|png)$/i")
+        .WithMaxFileSize(2000000)
+        .MaxNumberOfFiles(10)
+        .AddFormField("NationalCode", Model.NationalCode)
+        .AddFormField("PersonProfileid", Convert.ToString(Model.PersonProfileid))
+        .AddFormField("CatImageid", "1")
+        .AddFormField("Mobile", Model.Mobile)
+        .AddFormField("Category", "Mobile")
+        .ExcludeSharedScript()
+        .DisableImagePreview()
+        .RenderInline("_MvcFileupload")
+                                )
+
+                            </div>
+                           
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                           بارگذاری تصاویر بخش آرشیوی 
+                        </div>
+                        <div class="panel-body">
+                            <div class="well" hidden>
+
+
+                            </div>
+                            <div class="well">
+                                @(
+        Html.MvcFileUpload()
+        .UploadAt(Url.Action("UploadFile", "MvcUploaderTest"))
+        .WithFileTypes(@"/(\.|\/)(jpe?g|png)$/i")
+        .WithMaxFileSize(2000000)
+        .MaxNumberOfFiles(10)
+        .AddFormField("CatImageid", "2")
+        .AddFormField("PersonProfileid", Convert.ToString(Model.PersonProfileid))
+
+        .AddFormField("NationalCode", Model.NationalCode)
+        .AddFormField("Mobile", Model.Mobile)
+        .AddFormField("Category", "Archive")
+        .DisableImagePreview()
+        .ExcludeSharedScript()  //this should be called as this page contains another inline widget which loaded shared scripts
+        .RenderInline("_MvcFileupload")
+                                )
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@section scripts{
+    <script>
+ var deleted=false;
+
+        $(document).delegate('.DeleteDocTitle', 'click', function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: $(this).attr('data-url'),
+                method: 'post',
+                data: null,
+                success: function (data) {
+                    if (data == 'true') {
+                        $("#div-listindex").load(location.href + " #div-listindex");
+                        deleted=true;
+                    }
+                }
+            })
+        });
+</script>
+    }

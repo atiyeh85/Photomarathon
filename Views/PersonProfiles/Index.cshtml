@@ -1,0 +1,127 @@
+﻿@model IEnumerable<PhotogeraphyGrant.Models.PersonProfile>
+@{
+}
+<br />
+<br />
+<br />
+<div class="panel panel-primary">
+    <div class="panel-heading">
+
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table id="ExamTable" class="table table-bordered table-striped   table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th># </th>
+                                        <th>تصویر </th>
+                                        <th> پیوست</th>
+                                        <th> دریافت تصویر</th>
+                                        <th>رزومه </th>
+                                        <th>  کلمه  عبور  </th>
+                                        <th>نام ونام خانوادگی  </th>
+                                        <th>  ایمیل </th>
+                                        <th>کد ملی  </th>
+                                        <th>  شماره تلفن همراه </th>
+                                        <th>فعالیت  </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                @if (item.Image != null)
+                                                {
+
+                                                    <img class="img-rounded img-responsive" style="height:50px;width:50px;" src="@Url.Content(item.Image)" />
+                                                }
+                                                else
+                                                {
+                                                    <img class="img-thumbnail img-responsive" id="image_preview" style="height:50px;width:50px;" alt="" src="" />
+                                                }
+                                            </td>
+
+                                            <td>
+                                                @if (item.UploadImages.Count() > 0)
+                                                {
+                                                    <p>
+                                                        دارد
+                                                    </p>
+                                                }
+                                                else
+                                                {
+                                                    <p>
+                                                        ندارد
+                                                    </p>
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (item.Image != null)
+                                                {
+                                                  
+                                                        <a href="/PersonProfiles/downloadI/@item.PersonProfileid" >دریافت تصویر</a>
+
+                                                }
+                                                else
+                                                {
+                                                        
+                                                }
+                                        </td>
+                                            <td>
+                                                @if (item.ResomehUrl != null)
+                                                {
+                                                    <a href="/PersonProfiles/downloadR/@item.PersonProfileid" target="_blank">دریافت رزومه</a>
+                                                }
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Securitycode)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Fname) &nbsp;&nbsp;@Html.DisplayFor(modelItem => item.Lname)
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Mail)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.NationalCode)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Mobile)
+                                            </td>
+                                            <td>
+                                                <a href="/PersonProfiles/PersonDetails/@item.PersonProfileid" target="_blank"> مشاهده جزئیات</a>
+
+                                            </td>
+
+                                        </tr>
+                                                }
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th> </th>
+                                                    <th></th>
+                                                    <th></th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                        <!-- /.box-body -->
+                                </div>
+                    <!-- /.box -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+

@@ -1,0 +1,74 @@
+﻿@model PhotogeraphyGrant.Models.RefereePoint
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RefereePoint</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PersonProfile.Fname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PersonProfile.Fname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RefereeNote)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RefereeNote)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Point)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Point)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateInsert)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateInsert)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserInsert)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserInsert)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeInsert)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeInsert)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Flag)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Flag)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Refereeid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

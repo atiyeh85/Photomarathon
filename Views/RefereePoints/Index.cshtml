@@ -1,0 +1,69 @@
+﻿@model IEnumerable<PhotogeraphyGrant.Models.RefereePoint>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PersonProfile.Fname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RefereeNote)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Point)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateInsert)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserInsert)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TimeInsert)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Flag)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PersonProfile.Fname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RefereeNote)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Point)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateInsert)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserInsert)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimeInsert)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Flag)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Refereeid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Refereeid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Refereeid })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,344 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>جشنواره ملی عکس دارالسلطنه </title>
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Scripts/adminlte")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/modalform")
+    @Scripts.Render("~/bundles/jqueryvalUnobtrusive")
+    @Scripts.Render("~/bundles/bootstrap")
+
+</head>
+<body>
+   
+    <div id='myModal' class='modal fade in'>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div id='myModalContent'></div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .modal-header {
+
+    padding: 15px;
+    border-bottom: 1px solid #8b1919;
+    background-color: #2ea39a;
+
+}
+        .navbar-inverse .navbar-nav > li > a {
+
+    color: #2ea39a;
+
+}
+        .navbar-inverse {
+            background-color: #f1e7d5;
+            border-color: #3eb9ae;
+        }
+
+        .input-group-addon {
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 1;
+            color: #2b6a64;
+            text-align: center;
+        }
+    </style>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                   
+            </div>
+            <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("لیست ثبت نام شده گان", "Index", "PersonProfiles")</li>                        }
+
+                        @*<li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <img src="~/Content/img/bac.jpg" class="img-responsive" />
+        @RenderBody()
+        <hr />
+        <footer style="text-align:center">
+            <p>حقوق مادی و معنوی این سامانه متعلق به سازمان نوسازی و بهسازی شهرداری قزوین می باشد </p>
+        </footer>
+    </div>
+
+    @RenderSection("scripts", required: false)
+
+
+    <script>
+
+
+        $(document).ready(function () {
+            var t = $('#example4').DataTable({
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'autoWidth': true,
+                "pageLength": 10,
+                //"responsive": true,
+                "lengthMenu": [5, 10, 25, 50, "All"],
+                "language": {
+                    select: {
+                        rows: "%d سطرانتخاب شده "
+                    },
+
+                    "sEmptyTable": "هیچ داده‌ای در جدول وجود ندارد",
+                    "sInfo": "نمایش _START_ تا _END_ از _TOTAL_ ردیف",
+                    "sInfoEmpty": "نمایش 0 تا 0 از 0 ردیف",
+                    "sInfoFiltered": "(فیلتر شده از _MAX_ ردیف)",
+                    "sInfoPostFix": "",
+                    "sInfoThousands": ",",
+                    "sLengthMenu": "نمایش _MENU_ ردیف",
+                    "sLoadingRecords": "در حال بارگزاری...",
+                    "sProcessing": "در حال پردازش...",
+                    "sSearch": "جستجو:",
+                    "sZeroRecords": "رکوردی با این مشخصات پیدا نشد",
+
+                    "oPaginate": {
+                        "sFirst": "برگه‌ی نخست",
+                        "sLast": "برگه‌ی آخر",
+                        "sNext": "بعدی",
+                        "sPrevious": "قبلی"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": فعال سازی نمایش به صورت صعودی",
+                        "sSortDescending": ": فعال سازی نمایش به صورت نزولی"
+                    },
+
+                },
+                'stateSave': true,
+
+                dom: 'Bfrtip',
+                buttons: [
+                      'pageLength',
+                    {
+
+                        extend: 'print',
+                        text: 'پرینت',
+                        exportOptions: {
+                            columns: ':visible'
+                        },
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend(
+                                    '<img src="http://datatables.net/media/images/logo-fade.png" style="position:absolute; top:0; left:0;" />'
+                                );
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                     ,
+            {
+                extend: 'print',
+                text: 'پرینت سطر های انتخابی',
+            },
+
+                   {
+                       extend: 'colvis',
+                       text: 'تغییر ستونها',
+
+                       collectionLayout: 'fixed three-column'
+                   }
+                ],
+
+                columnDefs: [{
+                    targets: -1,
+                    visible: false
+                }],
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var select = $('<select><option value=""></option></select>')
+                            .appendTo($("#filters").find("th").eq(column.index()))
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val());
+
+                                column.search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        console.log(select);
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    });
+                },
+                select: true
+            }); t.on('order.dt search.dt', function () {
+                t.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+                    cell.innerHTML = i + 1;
+                });
+            }).draw();
+        });
+        $(document).ready(function () {
+                var b = $('#ExamTable').DataTable({
+                    'paging': true,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true,
+                    'autoWidth': true,
+                    "pageLength": 10,
+                    //"responsive": true,
+                    "lengthMenu": [5, 10, 25, 50,500, "All"],
+                    "language": {
+                        select: {
+                            rows: "%d سطرانتخاب شده "
+                        },
+
+                        "sEmptyTable": "هیچ داده‌ای در جدول وجود ندارد",
+                        "sInfo": "نمایش _START_ تا _END_ از _TOTAL_ ردیف",
+                        "sInfoEmpty": "نمایش 0 تا 0 از 0 ردیف",
+                        "sInfoFiltered": "(فیلتر شده از _MAX_ ردیف)",
+                        "sInfoPostFix": "",
+                        "sInfoThousands": ",",
+                        "sLengthMenu": "نمایش _MENU_ ردیف",
+                        "sLoadingRecords": "در حال بارگزاری...",
+                        "sProcessing": "در حال پردازش...",
+                        "sSearch": "جستجو:",
+                        "sZeroRecords": "رکوردی با این مشخصات پیدا نشد",
+
+                        "oPaginate": {
+                            "sFirst": "برگه‌ی نخست",
+                            "sLast": "برگه‌ی آخر",
+                            "sNext": "بعدی",
+                            "sPrevious": "قبلی"
+                        },
+                        "oAria": {
+                            "sSortAscending": ": فعال سازی نمایش به صورت صعودی",
+                            "sSortDescending": ": فعال سازی نمایش به صورت نزولی"
+                        },
+
+                    },
+                    'stateSave': true,
+               
+                    dom: 'Bfrtip',
+                  
+                    buttons: [
+                          'pageLength',
+                          {
+                              extend: 'excel',
+                              text: 'خروجی اکسل  ',
+                          },
+                          {
+                              extend: 'copy',
+                          },
+                        {
+
+                            extend: 'print',
+                            text: 'پرینت',
+                            exportOptions: {
+                                columns: ':visible'
+                            },
+                           
+                            customize: function (win) {
+                                $(win.document.body)
+                                    .css('font-size', '10pt')
+                                    .prepend(
+
+                                        '<img src="~/Content/1.jpg" style="position:absolute; top:0; left:0;" />'
+                                    );
+
+                                $(win.document.body).find('table')
+                                    .addClass('compact')
+                                    .css('font-size', 'inherit');
+                            }
+                        }
+                         ,
+               
+                
+                       {
+                           extend: 'colvis',
+                           text: 'تغییر ستونها',
+
+                           collectionLayout: 'fixed three-column'
+                       }
+                    ],
+
+                    columnDefs: [{
+                        targets: -1,
+                        visible: false
+                    }],
+                    "order": [[ 1, 'asc' ]],
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var select = $('<select><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    });
+                }
+            }
+
+                ); b.on('order.dt search.dt', function () {
+                    b.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+                        cell.innerHTML = i + 1;
+                    });
+                }).draw();
+        });
+
+
+        $(document).ready(function () {
+            var t = $('#example').DataTable({
+                "columnDefs": [{
+                    "searchable": false,
+                    "orderable": false,
+                    "targets": 0
+                }],
+                "order": [[1, 'asc']]
+            });
+
+            t.on('order.dt search.dt', function () {
+                t.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+                    cell.innerHTML = i + 1;
+                });
+            }).draw();
+        });
+    </script>
+
+</body>
+</html>

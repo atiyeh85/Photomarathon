@@ -1,0 +1,100 @@
+﻿@model IEnumerable<PhotogeraphyGrant.Models.UploadImage>
+
+@{
+    ViewBag.Title = "..::..";
+    Layout = null;
+}
+<div class="panel panel-default">
+    <div class="col-md-4">
+        <table style="text-align:right ;direction:rtl">
+            <tr>
+                <td>
+                    <div class="panel panel-warning">
+
+                        <div class="panel panel-heading">
+                            تصاویر بارگذاری شده بخش جنبی(معماری)
+                        </div>
+                        <div class="panel-body">
+                            @foreach (var item in Model)
+                            {
+                                if (item.CatImageid == 3)
+                                {
+                                    if (item.ImageName != null)
+                                    {
+                                        <a style="color:#ca0808" href="#" data-url="/PersonProfiles/DeleteFile/@item.Uploadid" class="fas fa-trash-alt fa-2x DeleteDocTitle"> </a>
+
+                                        @*@Html.ActionLink("Special===>>>" + item.ImageName, "DownloadFile", new { id = item.Uploadid })*@
+                                        @Html.ActionLink("Special===>>>" + item.ImageName, "DownlFile", new { id = item.Uploadid })
+                                        <br />
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-4">
+        <table style="text-align:right ;direction:rtl">
+
+            <tr>
+             <td>
+                 <div class="panel panel-primary">
+
+                     <div class="panel panel-heading">
+                         تصاویر بارگذاری شده بخش تلفن همراه
+                     </div>
+                     <div class="panel-body">
+                         @foreach (var item in Model)
+                         {
+                             if (item.CatImageid == 1)
+                             {
+                                 if (item.ImageName != null)
+                                 {
+                                    <a style="color:#ca0808" href="#" data-url="/PersonProfiles/DeleteFile/@item.Uploadid" class="fas fa-trash-alt fa-2x DeleteDocTitle"> </a>
+
+                                     @Html.ActionLink("Mobile===>>>" + item.ImageName, "DownlFile", new { id = item.Uploadid })
+                                     <br />
+
+                                 }
+
+                             }
+                         }
+                     </div>
+                 </div>
+             </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-4">
+        <table style="text-align:right ;direction:rtl">
+            <tr>
+                <td colspan="2">
+                    <div class="panel panel-success">
+                        <div class="panel panel-heading">
+                            تصاویر بارگذاری شده بخش آرشیوی
+                        </div>
+                        <div class="panel-body">
+                            @foreach (var item in Model)
+                            {
+                                if (item.CatImageid == 2)
+                                {
+                                    if (item.ImageName != null)
+                                    {
+                                        <a style="color:#ca0808" href="#" data-url="/PersonProfiles/DeleteFile/@item.Uploadid" class="fas fa-trash-alt fa-2x DeleteDocTitle"> </a>
+
+                                        @Html.ActionLink("Archive===>>>" + item.ImageName, "DownlFile", new { id = item.Uploadid })
+                                        <br />
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+
+        </table>
+    </div>
+</div>

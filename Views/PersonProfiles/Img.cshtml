@@ -1,0 +1,58 @@
+﻿@using MvcFileUploader.HtmlHelper
+@using MvcFileUploader.Models
+@{
+    ViewBag.Title = "..::..";
+
+    var showingInline = true;
+
+    //option for inline view only
+    var ui = "jquery".Equals(Request.Params["ui"]) ? UploadUI.JQueryUI : UploadUI.Bootstrap;
+    var toggleUi = ui == UploadUI.Bootstrap ? "jquery" : "bootstrap";
+
+    //setting layout based on ui
+    Layout = "~/Views/Shared/" + (ui == UploadUI.Bootstrap ? "_Layout.cshtml" : "_MvcFileUploaderLayout_jui.cshtml");
+}
+<br />
+<div class="row">
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            تصاویر ارسالی موبایل
+        </div>
+        <div class="panel-body">
+
+            <div class="row">
+                <div class="well" hidden>
+                    @(
+        Html.MvcFileUpload()
+        .UploadAt(Url.Action("UploadFile"))
+        .WithFileTypes(@"/(\.|\/)(jpe?g|png)$/i")
+        .WithMaxFileSize(5000000)
+        .AddFormField("entityId", "1234")
+        .RenderInline("_MvcFileupload")
+                    )
+
+                </div>
+                <div class="well">
+                    @(
+        Html.MvcFileUpload()
+        .UploadAt(Url.Action("UploadFile"))
+        .WithFileTypes(@"/(\.|\/)(jpe?g|png)$/i")
+        .WithMaxFileSize(40000)
+        .MaxNumberOfFiles(10)
+        .DisableImagePreview()
+        .ExcludeSharedScript()  //this should be called as this page contains another inline widget which loaded shared scripts
+        .RenderInline("_MvcFileupload")
+                    )
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-lg-offset-4">
+                    <a href="@Url.Action("ImgCamera", "PersonProfiles",new { id = 1}) " class="btn btn-primary "><span class="fas fa-images fa-3x" style="color:#fcfefd"> </span>ثبت تصاویر و ادامه ثبت نام</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
